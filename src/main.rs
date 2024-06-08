@@ -41,28 +41,28 @@ impl EventHandler for Handler {
     async fn ready(&self, ctx: Context, ready: Ready) {
         println!("{} is connected!", ready.user.name);
 
-        let guild_id = GuildId::new(
-            env::var("GUILD_ID")
-                .expect("Expected GUILD_ID in environment")
-                .parse()
-                .expect("GUILD_ID must be an integer"),
-        );
+        // let guild_id = GuildId::new(
+        //     env::var("GUILD_ID")
+        //         .expect("Expected GUILD_ID in environment")
+        //         .parse()
+        //         .expect("GUILD_ID must be an integer"),
+        // );
 
-        let commands = guild_id
-            .set_commands(&ctx.http, vec![
-                commands::ping::register(),
-                commands::id::register(),
-                commands::welcome::register(),
-                commands::numberinput::register(),
-                commands::attachmentinput::register(),
-                commands::modal::register(),
-            ])
-            .await;
+        //let commands = guild_id
+        //    .set_commands(&ctx.http, vec![
+        //        commands::ping::register(),
+        //        commands::id::register(),
+        //        commands::welcome::register(),
+        //        commands::numberinput::register(),
+        //        commands::attachmentinput::register(),
+        //        commands::modal::register(),
+        //    ])
+        //    .await;
 
-        println!("I now have the following guild slash commands: {commands:#?}");
+        //println!("I now have the following guild slash commands: {commands:#?}");
 
         let guild_command =
-            Command::create_global_command(&ctx.http, commands::wonderful_command::register())
+            Command::create_global_command(&ctx.http,commands::ping::register())
                 .await;
 
         println!("I created the following global slash command: {guild_command:#?}");
@@ -72,7 +72,7 @@ impl EventHandler for Handler {
 #[tokio::main]
 async fn main() {
     // Configure the client with your Discord bot token in the environment.
-    let token = env::var("DISCORD_TOKEN").expect("Expected a token in the environment");
+    let token = env::var("NIKO_BOT").expect("Expected a token in the environment");
 
     // Build our client.
     let mut client = Client::builder(token, GatewayIntents::empty())
