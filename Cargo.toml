@@ -1,7 +1,8 @@
 [package]
 name = "Niko_Bot"
 version = "0.1.0"
+edition = "2021"
 
 [dependencies]
-serenity = "0.12"
+serenity = { version = "0.12", default-features = false, features = ["client", "gateway", "rustls_backend", "model", "collector"] }
 tokio = { version = "1.21.2", features = ["macros", "rt-multi-thread"] }
